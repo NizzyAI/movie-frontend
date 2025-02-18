@@ -4,7 +4,10 @@
       <h1 class="movie-title">{{ movie.title }}</h1>
 
       <div class="movie-info">
-        <p><strong>Category:</strong> {{ movie.category ? movie.category.name : 'N/A' }}</p>
+        <p>
+          <strong>Category:</strong>
+          {{ movie.category_id ? categoryMapping[movie.category_id] : 'N/A' }}
+        </p>
         <p><strong>Director:</strong> {{ movie.director || 'N/A' }}</p>
         <p><strong>Release Date:</strong> {{ formattedReleaseDate }}</p>
         <p><strong>Synopsis:</strong> {{ movie.synopsis || 'No synopsis available.' }}</p>
@@ -47,6 +50,18 @@ export default {
       movie: {},
       reviews: [],
       isLoggedIn: false,
+      categoryMapping: {
+        1: 'Action',
+        2: 'Comedy',
+        3: 'Drama',
+        4: 'Horror',
+        5: 'Sci-Fi',
+        6: 'Thriller',
+        7: 'War',
+        8: 'Fantasy',
+        9: 'Animation',
+        10: 'Documentary',
+      },
     }
   },
   computed: {
@@ -74,6 +89,7 @@ export default {
           `http://localhost:8000/api/movies/${this.$route.params.id}`,
         )
         this.movie = response.data
+        console.log('Fetched movie:', this.movie)
       } catch (error) {
         console.error('Error fetching movie details:', error)
       }
@@ -81,8 +97,14 @@ export default {
 
     async fetchReviews() {
       try {
+        const token = localStorage.getItem('authToken')
         const response = await axios.get(
           `http://localhost:8000/api/movies/${this.$route.params.id}/reviews`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
         )
         this.reviews = response.data
       } catch (error) {
@@ -103,7 +125,7 @@ export default {
 
 .movie-title {
   font-size: 30px;
-  color: #42b983;
+  color: #ffa500;
   margin-bottom: 20px;
 }
 

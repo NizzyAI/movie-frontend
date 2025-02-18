@@ -20,7 +20,7 @@ export default {
 router-link {
   margin: 10px;
   text-decoration: none;
-  color: #42b983;
+  color: #ffa500;
 }
 
 router-link:hover {

@@ -93,7 +93,7 @@ export default {
 
 .title {
   font-size: 24px;
-  color: #42b983;
+  color: #ffa500;
   margin-bottom: 20px;
 }
 
@@ -116,7 +116,7 @@ export default {
 }
 
 .category-item:hover {
-  background-color: #42b983;
+  background-color: #ffa500;
   color: white;
   transform: translateY(-5px);
 }

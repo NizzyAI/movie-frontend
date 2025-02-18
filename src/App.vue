@@ -48,12 +48,13 @@ const checkLoginStatus = () => {
 <style scoped>
 nav {
   width: 100%;
-  font-size: 14px;
+  font-size: 22px;
   text-align: center;
   margin: 20px 0;
 }
 
 nav a {
+  font-family: 'Poppins', sans-serif;
   display: inline-block;
   padding: 10px 15px;
   border-left: 1px solid #ccc;
@@ -67,7 +68,7 @@ nav a:first-of-type {
 
 nav a.router-link-exact-active {
   font-weight: bold;
-  color: #42b983;
+  color: #ffa500;
 }
 
 main {

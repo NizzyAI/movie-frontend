@@ -68,13 +68,13 @@ textarea {
 
 button {
   padding: 10px 20px;
-  background-color: #42b983;
+  background-color: #ffa500;
   color: white;
   border: none;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #369f6e;
+  background-color: #ffa500;
 }
 </style>

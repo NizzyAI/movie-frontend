@@ -1,13 +1,13 @@
 <template>
-    <footer>
-      <p>&copy; 2025 Cinema Management System</p>
-    </footer>
-  </template>
-  
-  <style scoped>
+  <footer>
+    <p>&copy; 2025 Cinema Management System</p>
+  </footer>
+</template>
+
+<style scoped>
 footer {
   background: #333;
-  color: white;
+  color: #ffa500;
   padding: 10px;
   text-align: center;
   position: fixed;
