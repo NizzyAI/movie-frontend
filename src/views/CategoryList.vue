@@ -74,16 +74,16 @@ export default {
 <style scoped>
 .category-list-container {
   display: flex;
-  flex-direction: column;
   gap: 20px;
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  height: auto;
+  height: 100vh;
 }
 
 .category-section {
+  flex: 1;
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
@@ -122,6 +122,7 @@ export default {
 }
 
 .movie-section {
+  flex: 1;
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
