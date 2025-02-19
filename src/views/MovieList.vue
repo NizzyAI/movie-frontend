@@ -2,12 +2,7 @@
   <div class="movie-list-container">
     <h1 class="title">Movies</h1>
     <div class="search-bar">
-      <input
-        v-model="searchQuery"
-        type="text"
-        placeholder="Search by title"
-        @input="filterMovies"
-      />
+      <input v-model="searchQuery" type="text" placeholder="Search by title" />
     </div>
     <ul class="movie-list">
       <li v-for="movie in filteredMovies" :key="movie.id" class="movie-card">
@@ -29,33 +24,23 @@ export default {
   data() {
     return {
       movies: [],
-      categories: [],
       searchQuery: '',
-      selectedCategory: '',
     }
   },
   computed: {
     filteredMovies() {
-      return this.movies.filter((movie) => {
-        const matchesTitle = movie.title.toLowerCase().includes(this.searchQuery.toLowerCase())
-        const matchesCategory = this.selectedCategory
-          ? movie.category === this.selectedCategory
-          : true
-        return matchesTitle && matchesCategory
-      })
+      return this.movies.filter((movie) =>
+        movie.title.toLowerCase().includes(this.searchQuery.toLowerCase()),
+      )
     },
   },
   async created() {
     try {
       const response = await axios.get('http://localhost:8000/api/movies')
       this.movies = response.data
-      this.categories = [...new Set(this.movies.map((movie) => movie.category))]
     } catch (error) {
       console.error('Error fetching movies:', error)
     }
-  },
-  methods: {
-    filterMovies() {},
   },
 }
 </script>
@@ -78,14 +63,15 @@ export default {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+  width: 16%;
 }
 
-.search-bar input,
-.search-bar select {
+.search-bar input {
   padding: 8px;
   font-size: 16px;
   border: 1px solid #ddd;
   border-radius: 4px;
+  width: 100%;
 }
 
 .movie-list {
