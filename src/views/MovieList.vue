@@ -1,8 +1,16 @@
 <template>
   <div class="movie-list-container">
     <h1 class="title">Movies</h1>
+    <div class="search-bar">
+      <input
+        v-model="searchQuery"
+        type="text"
+        placeholder="Search by title"
+        @input="filterMovies"
+      />
+    </div>
     <ul class="movie-list">
-      <li v-for="movie in movies" :key="movie.id" class="movie-card">
+      <li v-for="movie in filteredMovies" :key="movie.id" class="movie-card">
         <router-link :to="`/movies/${movie.id}`" class="movie-link">
           <div class="movie-poster-container">
             <img :src="movie.poster" :alt="movie.title" class="movie-poster" />
@@ -21,15 +29,33 @@ export default {
   data() {
     return {
       movies: [],
+      categories: [],
+      searchQuery: '',
+      selectedCategory: '',
     }
+  },
+  computed: {
+    filteredMovies() {
+      return this.movies.filter((movie) => {
+        const matchesTitle = movie.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+        const matchesCategory = this.selectedCategory
+          ? movie.category === this.selectedCategory
+          : true
+        return matchesTitle && matchesCategory
+      })
+    },
   },
   async created() {
     try {
       const response = await axios.get('http://localhost:8000/api/movies')
       this.movies = response.data
+      this.categories = [...new Set(this.movies.map((movie) => movie.category))]
     } catch (error) {
       console.error('Error fetching movies:', error)
     }
+  },
+  methods: {
+    filterMovies() {},
   },
 }
 </script>
@@ -46,6 +72,20 @@ export default {
   font-size: 24px;
   color: #ffa500;
   margin-bottom: 20px;
+}
+
+.search-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.search-bar input,
+.search-bar select {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
 .movie-list {
